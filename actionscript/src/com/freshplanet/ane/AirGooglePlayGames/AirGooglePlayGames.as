@@ -120,6 +120,15 @@ package com.freshplanet.ane.AirGooglePlayGames
 			return name;
 		}
 		
+		public function getActivePlayerId():String
+		{
+			var name:String;
+			if (AirGooglePlayGames.isSupported)
+			{
+				name = _context.call("getActivePlayerId") as String;
+			}
+			return name;
+		}
 		
 		// --------------------------------------------------------------------------------------//
 		//																						 //
