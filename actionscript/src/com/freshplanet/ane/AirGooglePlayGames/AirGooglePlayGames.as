@@ -86,11 +86,11 @@ package com.freshplanet.ane.AirGooglePlayGames
 			}
 		}
 		
-		public function reportAchievement(achievementId:String, percent:Number = 0):void
+		public function reportAchievement(achievementId:String, percent:Number = 0, forceReload:Boolean = false):void
 		{
 			if (AirGooglePlayGames.isSupported)
 			{
-				_context.call("reportAchievemnt", achievementId, percent);
+				_context.call("reportAchievemnt", achievementId, percent, forceReload);
 			}
 		}
 		

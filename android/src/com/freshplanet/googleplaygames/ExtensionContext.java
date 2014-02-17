@@ -138,22 +138,17 @@ public class ExtensionContext extends FREContext implements GameHelper.GameHelpe
 	}
 
 	
-	public void reportAchivements(String achievementId, double percentDouble)
+	public void reportAchivements(String achievementId, double percentDouble, Boolean forceReload)
 	{
 		if (percentDouble > 0 && percentDouble <= 1){
     		int percent = (int) (percentDouble * 100);
-    		getGamesClient().loadAchievements(new AchievementsLoadListener(achievementId, percent), false);
+    		getGamesClient().loadAchievements(new AchievementsLoadListener(achievementId, percent), forceReload);
     	}
 	}
 	
 	public void reportScore(String leaderboardId, int highScore)
 	{
     	getGamesClient().submitScore(leaderboardId, highScore);
-	}
-
-	public void showLeaderboard(String leaderboardId)
-	{
-		//getGamesClient().
 	}
 
 	@Override

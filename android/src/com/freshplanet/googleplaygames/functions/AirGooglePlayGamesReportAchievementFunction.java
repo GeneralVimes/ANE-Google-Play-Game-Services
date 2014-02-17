@@ -15,10 +15,12 @@ public class AirGooglePlayGamesReportAchievementFunction implements FREFunction 
 	public FREObject call(FREContext arg0, FREObject[] arg1) {
 		String achievementId = null;
 		double percent = 0;
+		Boolean forceReload = false;
 		try
 		{
 			achievementId = arg1[0].getAsString();
 			percent = arg1[1].getAsDouble();
+			forceReload = arg1[2].getAsBool();
 		}
 		catch (Exception e)
 		{
@@ -32,7 +34,7 @@ public class AirGooglePlayGamesReportAchievementFunction implements FREFunction 
 			Extension.context.reportAchivements(achievementId);
 		} else
 		{
-			Extension.context.reportAchivements(achievementId, percent);
+			Extension.context.reportAchivements(achievementId, percent, forceReload);
 		}
 		
 		
