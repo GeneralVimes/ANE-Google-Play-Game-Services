@@ -18,6 +18,7 @@ You need to add the following in your AIR manifest, and replace YOUR_APP_ID by t
 	<application>
 		<!-- GooglePlay Games Services -->
 		<meta-data android:name="com.google.android.gms.games.APP_ID" android:value="\ YOUR_APP_ID" />
+		<meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
 		<activity android:name="com.freshplanet.googleplaygames.SignInActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
 	</application>
 
@@ -41,6 +42,9 @@ AirGooglePlayGames.getInstance().reportScore(leaderbordId, value);
 
 // Show Achivements
 AirGooglePlayGames.getInstance().showStandardAchievements();
+
+// Show Leaderboard
+AirGooglePlayGames.getInstance().showLeaderboard(leaderboardId);
 ```
 
 
@@ -48,6 +52,8 @@ Build script
 ---------
 
 Should you need to edit the extension source code and/or recompile it, you will find an ant build script (build.xml) in the *build* folder:
+
+NOTE: If you are building on a system with Java 1.7 you *MUST* specify target="1.6" source="1.6" in the javac tag of the build.xml file.
 
 ```bash
 cd /path/to/the/ane/build

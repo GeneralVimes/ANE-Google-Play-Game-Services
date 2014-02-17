@@ -12,7 +12,7 @@
         <delete dir="../android/temp"/>
         <mkdir dir="../android/temp/classes"/>
 
-        <javac srcdir="../android/src" destdir="../android/temp/classes" includeantruntime="false">
+        <javac target="1.6" source="1.6" srcdir="../android/src" destdir="../android/temp/classes" includeantruntime="false">
             <classpath>
                 <pathelement location="${android.sdk}/android.jar"/>
                 <pathelement location="${flex.sdk}/lib/android/FlashRuntimeExtensions.jar"/>
@@ -24,9 +24,9 @@
         <unzip src="${gplayservices.libs}/libs/google-play-services.jar" dest="../android/temp/zip" />
         <copydir src="../android/temp/zip/com" dest="../android/temp/classes/com"/>
 
-        <copy todir="../temp/android/res/">
-            <fileset dir="${gplayservices.libs}/bin/res"/>
-        </copy>
+        <!--<copy todir="../temp/android/res/">
+            <fileset dir="${gplayservices.libs}/res"/>
+        </copy>-->
         
         <copy todir="../temp/android/res/values/">
             <fileset dir="${gplayservices.libs}/res/values"/>
@@ -50,13 +50,13 @@
             <regexpmapper from=".*src.(.*)\.as" to="\1"/>
         </pathconvert>
 
-        <exec executable="${flex.sdk}/bin/compc${bin.ext}" failonerror="true">
+        <java jar="${flex.sdk}/lib/compc-cli${bin.ext}" fork="true" failonerror="true">
             <arg line='-source-path ../actionscript/src'/>
             <arg line='-output ../temp/swc/${name}.swc'/>
             <arg line='-swf-version=14'/>
             <arg line='-external-library-path+="${flex.sdk}/frameworks/libs/air/airglobal.swc"'/>
             <arg line='-include-classes ${classlist}'/>
-        </exec>
+        </java>
 
         <unzip src="../temp/swc/${name}.swc" dest="../temp/swc/content" overwrite="true"/>
         <copy file="../temp/swc/content/library.swf" todir="../temp/ios" overwrite="true"/>
@@ -67,7 +67,7 @@
 
     <!-- Package -->
     <target name="package" description="Create the extension package">
-        <exec executable="${flex.sdk}/bin/adt${bin.ext}" failonerror="true" dir="../temp">
+        <java jar="${flex.sdk}/lib/adt${bin.ext}" fork="true" failonerror="true" dir="../temp">
             <arg value="-package"/>
             <arg value="-target"/>
             <arg value="ane"/>
@@ -77,7 +77,7 @@
             <arg line="-platform iPhone-ARM -platformoptions ../build/platform.xml -C ios/ ."/>
             <arg line="-platform Android-ARM -C android/ ."/>
             <arg line="-platform default -C default/ ."/>
-        </exec>
+        </java>
 
         <move file="../temp/${name}.ane" todir="../bin"/>
         <delete dir="../temp"/>

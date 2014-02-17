@@ -29,9 +29,11 @@ import android.util.Log;
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREFunction;
 import com.freshplanet.googleplaygames.functions.AirGooglePlayGamesGetActivePlayerName;
+import com.freshplanet.googleplaygames.functions.AirGooglePlayGamesGetActivePlayerId;
 import com.freshplanet.googleplaygames.functions.AirGooglePlayGamesReportAchievementFunction;
 import com.freshplanet.googleplaygames.functions.AirGooglePlayGamesReportScoreFunction;
 import com.freshplanet.googleplaygames.functions.AirGooglePlayGamesShowAchievementsFunction;
+import com.freshplanet.googleplaygames.functions.AirGooglePlayGamesShowLeaderboardFunction;
 import com.freshplanet.googleplaygames.functions.AirGooglePlayGamesSignInFunction;
 import com.freshplanet.googleplaygames.functions.AirGooglePlayGamesSignOutFunction;
 import com.freshplanet.googleplaygames.functions.AirGooglePlayStartAtLaunch;
@@ -59,6 +61,8 @@ public class ExtensionContext extends FREContext implements GameHelper.GameHelpe
 		functionMap.put("reportScore", new AirGooglePlayGamesReportScoreFunction());
 		functionMap.put("showStandardAchievements", new AirGooglePlayGamesShowAchievementsFunction());
 		functionMap.put("getActivePlayerName", new AirGooglePlayGamesGetActivePlayerName());
+		functionMap.put("getActivePlayerId", new AirGooglePlayGamesGetActivePlayerId());
+		functionMap.put("showLeaderboard", new AirGooglePlayGamesShowLeaderboardFunction());
 		return functionMap;	
 	}
 	
@@ -145,6 +149,11 @@ public class ExtensionContext extends FREContext implements GameHelper.GameHelpe
 	public void reportScore(String leaderboardId, int highScore)
 	{
     	getGamesClient().submitScore(leaderboardId, highScore);
+	}
+
+	public void showLeaderboard(String leaderboardId)
+	{
+		//getGamesClient().
 	}
 
 	@Override
