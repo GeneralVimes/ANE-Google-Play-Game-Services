@@ -952,7 +952,15 @@ public class GameHelper implements GooglePlayServicesClient.ConnectionCallbacks,
     }
 
     /** Shows an error dialog that's appropriate for the failure reason. */
+   //many thanks for all your great job!
+   //right now the whole switch block is commented, so, when the function is called, the errorDialog is still null
+   //and when errorDialog.show() is called, there is java.lang.NullPointerException
+   //I'm not sure, whether it will be safe to de-comment this switch block (perhaps you commented it
+   //due to erros in the makeSimpleDialog or GooglePlayServicesUtil.getErrorDialog functions
+   //so, the quickest way to avoid application crash on login error is to return from the showFailureDialog 
+   //as soon as we entered thene
     void showFailureDialog() {
+        return;
         Context ctx = getContext();
         if (ctx == null) {
             debugLog("*** No context. Can't show failure dialog.");
